@@ -11,6 +11,8 @@ module Bouncer
       policy = Policy.new
       policy.permission_nodes << node
 
+      policy.save
+
       dude = ::Holder.new(policies: [policy]) # This is a test holder
       expect(dude.can? "woot.donk").to be true
     end
