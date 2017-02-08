@@ -1,6 +1,7 @@
 $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
 require "bouncer"
 require 'database_cleaner'
+require 'support/factory_girl'
 
 Mongoid.load!('./spec/config/mongoid.yml', :test)
 
