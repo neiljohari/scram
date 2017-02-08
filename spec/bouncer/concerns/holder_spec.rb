@@ -6,6 +6,7 @@ module Bouncer
     it "holds permissions" do
       node = PermissionNode.new
       node.name = "woot.donk"
+      node.targets << Target.new()
       node.allowed = true
 
       policy = Policy.new
