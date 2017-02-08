@@ -4,5 +4,7 @@ module Bouncer
     store_in collection: 'bouncer_targets'
 
     embedded_in :permission_node
+
+    
   end
 end
