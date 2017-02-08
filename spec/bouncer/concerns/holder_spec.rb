@@ -1,5 +1,5 @@
 require "spec_helper"
-require "bouncer/holder" # Test implementation of Holder
+require "bouncer/concerns/holder" # Test implementation of Holder
 
 module Bouncer
   describe Holder do
