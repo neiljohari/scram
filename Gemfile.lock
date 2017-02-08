@@ -2,7 +2,8 @@ PATH
   remote: .
   specs:
     bouncer (0.1.0)
-      mongoid (>= 6.1.0)
+      activesupport (~> 5.0)
+      mongoid (~> 6.1)
 
 GEM
   remote: https://rubygems.org/
