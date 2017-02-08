@@ -3,7 +3,7 @@ require "bouncer/concerns/holder" # Test implementation of Holder
 
 module Bouncer
   describe Holder do
-    it "holds permissions" do
+    xit "holds permissions" do
       node = PermissionNode.new
       node.name = "woot.donk"
       node.targets << Target.new()
