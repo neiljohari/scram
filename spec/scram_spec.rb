@@ -1,8 +1,8 @@
 require "spec_helper"
 
-describe Bouncer do
+describe Scram do
   it "has a version number" do
-    expect(Bouncer::VERSION).not_to be nil
+    expect(Scram::VERSION).not_to be nil
   end
 
   #it "does something useful" do

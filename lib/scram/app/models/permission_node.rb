@@ -1,7 +1,7 @@
-module Bouncer
+module Scram
   class PermissionNode
     include Mongoid::Document
-    store_in collection: 'permission_nodes'
+    store_in collection: 'scram_permission_nodes'
 
     embedded_in :policy
     embeds_many :targets

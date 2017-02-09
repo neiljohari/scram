@@ -1,7 +1,7 @@
 require "spec_helper"
-require "bouncer/concerns/holder" # Test implementation of Holder
+require "scram/concerns/holder" # Test implementation of Holder
 
-module Bouncer
+module Scram
   describe Holder do
     xit "holds permissions" do
       node = PermissionNode.new

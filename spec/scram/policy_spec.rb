@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Bouncer::Policy do
+describe Scram::Policy do
 
   context "policy with nodes" do
     let(:policy) { FactoryGirl.create(:policy, permission_nodes_count: 5) }

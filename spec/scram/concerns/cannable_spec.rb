@@ -1,6 +1,6 @@
 require "spec_helper"
 
-module Bouncer
+module Scram
   class Foo
     include Cannable
   end

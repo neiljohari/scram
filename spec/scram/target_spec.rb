@@ -1,5 +1,5 @@
 require "spec_helper"
 
-describe Bouncer::Target do
+describe Scram::Target do
 
 end

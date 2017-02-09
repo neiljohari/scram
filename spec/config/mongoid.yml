@@ -1,6 +1,6 @@
 test:
   clients:
     default:
-      database: bouncer_db
+      database: scram_db
       hosts:
         - localhost:27017
