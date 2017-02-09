@@ -1,6 +1,7 @@
 # Cannable make can? checks forward down a chain
 # It is a "smarter" delegate method, accounting for if we are passing to a collection
 ## CAVEAT: To intercept initialize, Cannable must be included below the initialize definition
+
 module Cannable
   extend ActiveSupport::Concern
 
@@ -25,7 +26,10 @@ module Cannable
         #original_method.bind(self).call(*args, &block)
         self.send(:initialize_old, *args, &block)
 
-        pass_to = instance_variable_get(self.class.pass_to)
+        #pass_to = if instance_variables.includes? self.class.pass_to
+        #  instance_variable_get(self.class.pass_to)
+        #else
+        pass_to = self.send(self.class.pass_to)
 
         # If pass_to isn't a single object, we forward our check to each element
         if pass_to.is_a? Enumerable
@@ -34,7 +38,9 @@ module Cannable
           end
         end
 
-        self.class.delegate :can?, to: self.class.pass_to
+        unless self.respond_to? :can? # Cannables can define can? to do a preliminary check, and if they want they can just forward to pass_to.can?
+          self.class.delegate :can?, to: self.class.pass_to
+        end
       end
     end
   end

@@ -1,7 +1,8 @@
 module Scram
   class PermissionNode
     include Mongoid::Document
-    store_in collection: 'scram_permission_nodes'
+    include Cannable
+    cannable pass_to: :targets
 
     embedded_in :policy
     embeds_many :targets
@@ -10,7 +11,8 @@ module Scram
     field :allowed, type: Boolean
 
     def can? action, target=nil, *args
-      true
+      return true if self.name == action && target != nil # Return early if we're just doing a name-based check
+      return targets.can? action, target=nil, *args
     end
   end
 end
