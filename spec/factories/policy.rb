@@ -11,7 +11,7 @@ FactoryGirl.define do
 
   factory :permission_node, :class => Scram::PermissionNode do
     policy
-#begin TODO: Pass transient targets_count from policy creation as an option
+=begin TODO: Pass transient targets_count from policy creation as an option
     transient do
       targets_count 1
     end
@@ -19,7 +19,7 @@ FactoryGirl.define do
     after(:create) do |permission_node, evaluator|
       create_list(:target, evaluator.targets_count, permission_node: permission_node)
     end
-#=end
+=end
   end
 
   factory :target, :class => Scram::Target do

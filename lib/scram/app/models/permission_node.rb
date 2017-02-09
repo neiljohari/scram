@@ -11,8 +11,11 @@ module Scram
     field :allowed, type: Boolean
 
     def can? action, target=nil, *args
-      return true if self.name == action && target != nil # Return early if we're just doing a name-based check
-      return targets.can? action, target=nil, *args
+      return false if self.name.to_s != action.to_s # This node doesn't apply at all
+      return true if self.name == action && target == nil # Return early if we're just doing a name-based check
+      return false if target == nil # If we couldn't check it based off the node name, and we don't even have a target to work with, we cannot do anything.
+      return targets.can? action, target, *args
     end
+
   end
 end
