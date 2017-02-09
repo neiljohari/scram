@@ -16,7 +16,7 @@ module Scram
         return true if self.collection == target.class.name
       else
         model = self.collection.constantize
-        return model.where(match_states).include? target # Figure out if every model this target applies to includes the parameter target
+        return model.where(match_states).include? target # Figure out if any model this target applies to includes the parameter target
       end
     end
 
