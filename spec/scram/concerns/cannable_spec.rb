@@ -10,7 +10,7 @@ module Scram
     end
 
     include Cannable
-    cannable pass_to: :@midlevelfoos # Midlevel foos is a collection
+    cannable pass_to: :midlevelfoos # Midlevel foos is a collection
   end
 
   class MidLevelFoo
@@ -21,7 +21,15 @@ module Scram
     end
 
     include Cannable
-    cannable pass_to: :@final_foo
+    cannable pass_to: :final_foo
+
+    # This test would demonstrate that can? can be defined earlier and then deferred
+    #def can? action, target, *args
+      ##return final_foo.can? action, target, *args # DEFERRING
+
+      #return true if action == :wonk && target == :donk # Returning early in the chain
+      #false
+    #end
   end
 
   class FinalFoo
