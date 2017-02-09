@@ -1,31 +1,34 @@
 require "spec_helper"
-
 module Scram
-  class TopLevelFoo
-    include Cannable
-    cannable :collection, pass_to: :midlevelfoos
 
+  require 'active_support/core_ext/module'
+  class TopLevelFoo
     attr_accessor :midlevelfoos
 
     def initialize
       @midlevelfoos = [MidLevelFoo.new, MidLevelFoo.new]
     end
+
+    include Cannable
+    cannable pass_to: :@midlevelfoos # Midlevel foos is a collection
   end
 
   class MidLevelFoo
-    include Cannable
-    cannable pass_to: :final_foo
-
-    attr_accessor :final_foo
+    attr_accessor :final_foo # Final foo is a single
 
     def initialize
       @final_foo = FinalFoo.new
     end
+
+    include Cannable
+    cannable pass_to: :@final_foo
   end
 
   class FinalFoo
-    def can? *args
-      true
+    # Anyone can wonk donk, but no one can do anything else
+    def can? action, target, *args
+      return true if action == :wonk && target == :donk
+      false
     end
   end
 
@@ -37,7 +40,6 @@ module Scram
           yield(Object.const_get("Scram::#{foo}").new)
       end
     end
-
 
     it "is includable" do
       test_on_cannables do |foo|
@@ -54,6 +56,7 @@ module Scram
     context TopLevelFoo do
       it "chains the can? method down" do
         expect(top_level_foo.can? :wonk, :donk).to eq(true)
+        expect(top_level_foo.can? :wonk, :bonk).to eq(false)
       end
     end
 
