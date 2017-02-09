@@ -3,25 +3,24 @@ require "scram/concerns/holder" # Test implementation of Holder
 
 module Scram
   class SimpleHolder
-      include Scram::Holder
 
       attr_accessor :policies
 
       def initialize(policies: [])
           @policies = policies
       end
+
+      include Holder
   end
 
   describe Holder do
-    xit "holds permissions" do
+    it "holds permissions" do
       node = PermissionNode.new
       node.name = "woot.donk"
-      node.targets << Target.new()
       node.allowed = true
 
       policy = Policy.new
       policy.permission_nodes << node
-
       policy.save
 
       dude = SimpleHolder.new(policies: [policy]) # This is a test holder
