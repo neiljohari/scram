@@ -17,9 +17,13 @@ module Cannable
 
   def self.included(base) # Intercepts initialize
     base.class_eval do
-      original_method = instance_method(:initialize)
+      #original_method = instance_method(:initialize)
+
+      alias_method :initialize_old, :initialize
+
       define_method(:initialize) do |*args, &block|
-        original_method.bind(self).call(*args, &block)
+        #original_method.bind(self).call(*args, &block)
+        self.send(:initialize_old, *args, &block)
 
         pass_to = instance_variable_get(self.class.pass_to)
 
