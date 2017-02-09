@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'bouncer/version'
+require 'scram/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "bouncer"
-  spec.version       = Bouncer::VERSION
+  spec.name          = "scram"
+  spec.version       = Scram::VERSION
   spec.authors       = ["skreem"]
   spec.email         = ["cskreem@gmail.com"]
 

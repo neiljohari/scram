@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
-require "bouncer"
+require "scram"
 require 'database_cleaner'
 require 'support/factory_girl'
 

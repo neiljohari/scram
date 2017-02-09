@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :policy, :class => Bouncer::Policy do
+  factory :policy, :class => Scram::Policy do
     transient do
       permission_nodes_count 0
     end
@@ -9,7 +9,7 @@ FactoryGirl.define do
     end
   end
 
-  factory :permission_node, :class => Bouncer::PermissionNode do
+  factory :permission_node, :class => Scram::PermissionNode do
     policy
 =begin TODO: Pass transient targets_count from policy creation as an option
     transient do
@@ -22,7 +22,7 @@ FactoryGirl.define do
 =end
   end
 
-  factory :target, :class => Bouncer::Target do
+  factory :target, :class => Scram::Target do
     permission_node
   end
 end

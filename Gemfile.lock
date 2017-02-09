@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bouncer (0.1.0)
+    scram (0.1.0)
       activesupport (~> 5.0)
       mongoid (~> 6.1)
 
@@ -50,12 +50,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bouncer!
   bundler (~> 1.13)
   database_cleaner (~> 1.5)
   factory_girl (~> 4.8)
   rake (~> 10.0)
   rspec (~> 3.0)
+  scram!
 
 BUNDLED WITH
    1.13.7

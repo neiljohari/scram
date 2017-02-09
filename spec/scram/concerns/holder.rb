@@ -1,5 +1,5 @@
 class Holder
-    include Bouncer::Holder
+    include Scram::Holder
 
     attr_accessor :policies
 
