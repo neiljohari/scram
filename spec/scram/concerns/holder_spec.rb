@@ -17,7 +17,7 @@ module Scram
     it "holds permissions" do
       node = PermissionNode.new
       node.name = "woot.donk"
-      node.allowed = true
+      #node.allowed = true
 
       policy = Policy.new
       policy.permission_nodes << node
