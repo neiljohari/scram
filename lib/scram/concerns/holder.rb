@@ -6,5 +6,9 @@ module Scram
       raise NotImplementedError
     end
 
+    def can? action, target
+      policies.any? {|p| p.can? action, target}
+    end
+
   end
 end
