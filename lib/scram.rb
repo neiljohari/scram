@@ -1,5 +1,6 @@
 require "scram/version"
 require "mongoid"
+require "scram/dsl.rb"
 require "scram/concerns/cannable.rb"
 require "scram/concerns/holder.rb"
 require "scram/app/models/permission_node.rb"
