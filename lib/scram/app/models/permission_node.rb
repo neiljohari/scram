@@ -9,7 +9,7 @@ module Scram
 
     def can? action, target
       return false unless action == self.name # prevent checking targets if the action isn't relevant
-      return targets.any? {|target| target.can? target}
+      return targets.any? {|t| t.can? target}
     end
   end
 end
