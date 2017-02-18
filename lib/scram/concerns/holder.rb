@@ -7,6 +7,9 @@ module Scram
     end
 
     def can? action, target
+      target = target.to_s if target.is_a? Symbol
+      action = action.to_s if action.is_a? Symbol
+
       policies.any? {|p| p.can? action, target}
     end
 

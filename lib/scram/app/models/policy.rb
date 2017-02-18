@@ -7,7 +7,7 @@ module Scram
 
     validates_presence_of :collection
 
-    field :collection, type: String # This is usually a model name, but depending on `model` it could also just be a global policy
+    field :collection_name, type: String # This is usually a model name, but depending on `model` it could also just be a global policy
     field :model, type: Boolean, default: true # Is this a Policy affiliated with a model (i.e. is `collection` a Model)?
 
     def can? action, target
@@ -17,10 +17,10 @@ module Scram
         return false if self.model # policy doesn't handle strings
       else                   # ex: can? :edit, @model_instance
         return false if !self.model # policy doesn't handle models
-        return false if self.collection != target.name # policy doesn't handle these types of models
+        return false if self.collection_name != target.name # policy doesn't handle these types of models
       end
 
-      return permission_nodes.any? {|node| node.can? action, target}
+      return permission_nodes.any? {|node| node.can?(action, target)}
     end
   end
 end

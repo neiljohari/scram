@@ -7,7 +7,7 @@ module Scram
 
     def can? obj
       if obj.is_a? String
-        return obj == conditions[:equals][:$target_name]
+        return obj == conditions[:equals][:@target_name]
       else
         # TODO: Comparators
       end
