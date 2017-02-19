@@ -140,7 +140,7 @@ target.conditions = {:equals => {:@owner => "@holder"}}
 
 Scram is smart enough to realize that any key starting with an `@`, like `@owner`, is a manually defined condition. Now, calling `user.can? :edit, @post` will compare the value returned by the `condition` block to the hash value (which in this case is the Holder).
 
-### Defining a New Comparator
+#### Defining a New Comparator
 You may have noticed from the previous examples that the keys of our Target conditions were things like `equals` and `less_than`. These come from our Comparator definitions (see `Scram::DSL::Definitions::COMPARATORS`).
 
 These comparators are defined using the DSL for comparators. We provide a basic set of comparing operators, but you may need to add your own. To do this, we recommend creating an initializer file and then calling something like the following:
