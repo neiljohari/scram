@@ -23,7 +23,7 @@ module Scram::DSL
       end
 
       comparator :includes do |a, b|
-        a.send(:includes?, b)
+        a.send(:include?, b)
       end
 
       comparator :not_equals do |a, b|

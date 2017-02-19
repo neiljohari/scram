@@ -10,31 +10,54 @@ module Scram
       def initialize(policies: [])
           @policies = policies
       end
+
+      def scram_compare_value
+        "Mr. Holder Guy"
+      end
   end
 
   class TestModel
     include Mongoid::Document
+
     field :targetable_int, type: Integer, default: 3
+    field :targetable_array, type: Array, default: ["a"]
+    field :owner, type: String, default: "Mr. Holder Guy"
   end
 
   describe Holder do
     it "holds model permissions" do
       target = Target.new
-      target.conditions = {:equals => { :targetable_int =>  3}}
       target.actions << "woot"
 
       policy = Policy.new
       policy.collection_name = TestModel.name # A misc policy for strings
       policy.targets << target
-
-      policy.save
-
       dude = SimpleHolder.new(policies: [policy]) # This is a test holder
+
+
+      # Check that it tests a field equals something
+      target.conditions = {:equals => { :targetable_int =>  3}}
+      policy.save
       expect(dude.can? :woot, TestModel.new).to be true
+
+      # Check that it tests a field is less than something
+      target.conditions = {:less_than => { :targetable_int =>  4}}
+      policy.save
+      expect(dude.can? :woot, TestModel.new).to be true
+
+      # Test that it checks if an array includes something
+      target.conditions = {:includes => {:targetable_array => "a"}}
+      policy.save
+      expect(dude.can? :woot, TestModel.new).to be true
+
+      # Test that it checks if a document is owned by holder
+      target.conditions = {:equals => {:owner => "@holder"}}
+      policy.save
+      expect(dude.can? :woot, TestModel.new).to be true
+
     end
 
     it "holds string permissions" do
-
       target = Target.new
       target.conditions = {:equals => { :@target_name =>  "donk"}}
       target.actions << "woot"
@@ -61,8 +84,6 @@ module Scram
       model_policy.save
 
       expect(model_policy.model?).to be true
-
-
     end
 
   end
