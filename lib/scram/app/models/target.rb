@@ -5,6 +5,9 @@ module Scram
 
     field :actions, type: Array, default: []
     field :conditions, type: Hash, default: {}
+    
+    field :priority, type: Integer, default: 0
+    field :allow, type: Boolean, default: true
 
     def can? holder, action, obj
       return false unless actions.include? action

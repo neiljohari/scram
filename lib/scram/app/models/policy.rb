@@ -34,7 +34,7 @@ module Scram
         return false if self.collection_name != obj.class.name # policy doesn't handle these types of models
       end
 
-      return targets.any? {|target| target.can?(holder, action, obj)}
+      return targets.order_by([[:priority, :asc]]).any? {|target| target.can?(holder, action, obj)}
     end
   end
 end
