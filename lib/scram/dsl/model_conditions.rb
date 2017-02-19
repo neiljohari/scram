@@ -6,8 +6,17 @@ module Scram::DSL
     end
 
     module ClassMethods
+      # @return [Hash] Mapping of condition names to Procs to execute them
       attr_accessor :scram_conditions
 
+      # Method meant to be used in the including class to begin defining conditions
+      #
+      # Example
+      #   scram_define do
+      #     condition :foo do
+      #       |instance| "hello world"
+      #     end
+      #   end
       def scram_define(&block)
         @scram_conditions = Builders::ConditionBuilder.new(&block).conditions
       end
