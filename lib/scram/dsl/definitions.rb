@@ -10,7 +10,7 @@ module Scram::DSL
     # note: yes, this is a bit silly, but it allows for custom comparators easily
     ## really this is just a mapping between name and method (since ==, >=, etc are all just methods as well)
     COMPARATORS = Builders::ComparatorBuilder.new do
-      comparator :equal do |a, b|
+      comparator :equals do |a, b|
         a==b
       end
 
@@ -26,7 +26,7 @@ module Scram::DSL
         a.send(:includes?, b)
       end
 
-      comparator :not_equal do |a, b|
+      comparator :not_equals do |a, b|
         a != b
       end
     end.comparators

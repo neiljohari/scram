@@ -25,7 +25,7 @@ module Scram
 
   describe Scram::DSL::Definitions do
     it "defines and retrieves default comparators" do
-      equal_comparator = Scram::DSL::Definitions::COMPARATORS[:equal]
+      equal_comparator = Scram::DSL::Definitions::COMPARATORS[:equals]
       expect(equal_comparator.call("a", "a")).to be true
       expect(equal_comparator.call("a", "b")).to be false
     end

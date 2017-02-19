@@ -13,5 +13,6 @@ module Scram
       policies.any? {|p| p.can? self, action, target}
     end
 
+    
   end
 end

@@ -10,7 +10,7 @@ module Scram
     field :collection_name, type: String # This is usually a model name, but depending on #model? it could also just be a global policy
 
     # Helper method to easily tell if this policy is bound to a model
-    ## Unnecessary since we can just call model.nil?, but it is helpful nonetheless 
+    ## Unnecessary since we can just call model.nil?, but it is helpful nonetheless
     def model?
       return !model.nil?
     end
@@ -31,7 +31,7 @@ module Scram
         return false if self.model? # policy doesn't handle strings
       else                   # ex: can? :edit, @model_instance
         return false if !self.model? # policy doesn't handle models
-        return false if self.collection_name != obj.name # policy doesn't handle these types of models
+        return false if self.collection_name != obj.class.name # policy doesn't handle these types of models
       end
 
       return targets.any? {|target| target.can?(holder, action, obj)}
