@@ -4,6 +4,7 @@ require 'database_cleaner'
 require 'support/factory_girl'
 
 Mongoid.load!('./spec/config/mongoid.yml', :test)
+#Mongo::Logger.logger.level = ::Logger::DEBUG
 
 RSpec.configure do |config|
 
