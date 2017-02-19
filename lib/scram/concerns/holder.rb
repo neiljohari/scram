@@ -6,6 +6,10 @@ module Scram
       raise NotImplementedError
     end
 
+    def scram_compare_value
+      raise NotImplementedError
+    end
+
     def can? action, target
       target = target.to_s if target.is_a? Symbol
       action = action.to_s if action.is_a? Symbol
@@ -13,6 +17,6 @@ module Scram
       policies.any? {|p| p.can? self, action, target}
     end
 
-    
+
   end
 end

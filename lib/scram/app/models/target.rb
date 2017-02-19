@@ -23,12 +23,12 @@ module Scram
             # @ symbol in model_value => a special replace variable
             field = field.to_s
             attribute = if field.starts_with? "@"
-              policy.model.scram_conditions[field.split("@")[1]].call(obj)
+              policy.model.scram_conditions[field.split("@")[1].to_sym].call(obj)
             else
               obj.send(field)
             end
 
-            model_value.gsub! "@holder", holder if model_value.respond_to?(:gsub!)
+            model_value.gsub! "@holder", holder.scram_compare_value if model_value.respond_to?(:gsub!)
             # TODO: Ensure that holder being replaced is the right thing to do here (regarding document ids vs string representation)
 
             return comparator.call(attribute, model_value)
