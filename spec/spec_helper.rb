@@ -3,6 +3,9 @@ require "scram"
 require 'database_cleaner'
 require 'support/factory_girl'
 
+require "scram/test_implementations/simple_holder"
+require "scram/test_implementations/test_model"
+
 Mongoid.load!('./spec/config/mongoid.yml', :test)
 #Mongo::Logger.logger.level = ::Logger::DEBUG
 

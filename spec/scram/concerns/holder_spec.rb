@@ -1,30 +1,7 @@
 require "spec_helper"
-require "scram/concerns/holder" # Test implementation of Holder
 
 module Scram
-  class SimpleHolder
-      include Holder
-
-      attr_accessor :policies
-
-      def initialize(policies: [])
-          @policies = policies
-      end
-
-      def scram_compare_value
-        "Mr. Holder Guy"
-      end
-  end
-
-  class TestModel
-    include Mongoid::Document
-
-    field :targetable_int, type: Integer, default: 3
-    field :targetable_array, type: Array, default: ["a"]
-    field :owner, type: String, default: "Mr. Holder Guy"
-  end
-
-  describe Holder do
+  describe Scram::Holder do
     it "holds model permissions" do
       target = Target.new
       target.actions << "woot"

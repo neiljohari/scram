@@ -44,14 +44,18 @@ module Scram
             # @ symbol in field name => it is defined as a DSL condition, otherwise it is a model attribute
             # @ symbol in model_value => a special replace variable
             field = field.to_s
-            attribute = if field.starts_with? "@"
+
+            attribute = begin
+              if field.starts_with? "@"
               policy.model.scram_conditions[field.split("@")[1].to_sym].call(obj)
-            else
-              obj.send(field)
+              else
+                obj.send(field)
+              end
+            rescue
+              return false
             end
 
             model_value.gsub! "@holder", holder.scram_compare_value if model_value.respond_to?(:gsub!)
-
             return false unless comparator.call(attribute, model_value)
           end
         end
