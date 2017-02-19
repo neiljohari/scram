@@ -10,11 +10,27 @@ module Scram
       def initialize(policies: [])
           @policies = policies
       end
+  end
 
+  class TestModel
+    include Mongoid::Document
+    field :targetable_int, type: Integer, default: 3
   end
 
   describe Holder do
-    xit "holds model permissions" do
+    it "holds model permissions" do
+      target = Target.new
+      target.conditions = {:equals => { :targetable_int =>  3}}
+      target.actions << "woot"
+
+      policy = Policy.new
+      policy.collection_name = TestModel.name # A misc policy for strings
+      policy.targets << target
+
+      policy.save
+
+      dude = SimpleHolder.new(policies: [policy]) # This is a test holder
+      expect(dude.can? :woot, TestModel.new).to be true
     end
 
     it "holds string permissions" do
@@ -43,8 +59,6 @@ module Scram
       model_policy = Policy.new
       model_policy.collection_name = SimpleHolder.name
       model_policy.save
-
-      puts "THE MODEL POLICY: #{model_policy.model}"
 
       expect(model_policy.model?).to be true
 
