@@ -52,10 +52,11 @@ module Scram
 
             model_value.gsub! "@holder", holder.scram_compare_value if model_value.respond_to?(:gsub!)
 
-            return comparator.call(attribute, model_value)
+            return false unless comparator.call(attribute, model_value)
           end
         end
       end
+      return true
     end
   end
 end
