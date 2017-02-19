@@ -63,6 +63,9 @@ In the above example, the target would only apply to models where the `age` attr
 
 If you need to refer to the holder in a value (for example to check if a holder owns a document), you can use `@holder` for the model value. Scram will automatically replace this when checking with the actual holder being checked. For example, conditions might look something like this: `{:equals => {:owner => "@holder"}}`.
 
+Targets can also be used for String permissions. In order for a target to represent a String, simply use an inner hash with key `@target_name` and value of the String desired. For example:
+`{equals: {@target_name: "peek_bar"}}`. This target would then only apply if the passed in Object is a String and is called "peek_bar". Attaching actions to the target would then allow you to call something like `can? holder, :view, "peek_bar"` where the Target's actions list would now need to include `view`.
+
 ### Condition DSL
 Scram provides an easy to use DSL to define complex conditions which can be referenced in the database by prefixing an `@` before a key name in a condition.
 
