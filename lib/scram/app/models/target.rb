@@ -33,7 +33,7 @@ module Scram
       return false unless actions.include? action
       return false if !allow
       if obj.is_a? String # ex: can? user, :view, "peek_bar"
-        return obj == conditions[:equals][:@target_name]
+        return obj == conditions[:equals][:'*target_name']
         # ex: conditions: {equals: {@target_name: "peek_bar"}}
       else
         conditions.each do |comparator_name, fields_hash|
@@ -46,8 +46,8 @@ module Scram
             field = field.to_s
 
             attribute = begin
-              if field.starts_with? "@"
-              policy.model.scram_conditions[field.split("@")[1].to_sym].call(obj)
+              if field.starts_with? "*"
+              policy.model.scram_conditions[field.split("*")[1].to_sym].call(obj)
               else
                 obj.send(field)
               end
@@ -55,7 +55,7 @@ module Scram
               return false
             end
 
-            model_value.gsub! "@holder", holder.scram_compare_value if model_value.respond_to?(:gsub!)
+            model_value.gsub! "*holder", holder.scram_compare_value if model_value.respond_to?(:gsub!)
             return false unless comparator.call(attribute, model_value)
           end
         end

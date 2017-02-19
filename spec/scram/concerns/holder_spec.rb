@@ -28,7 +28,7 @@ module Scram
       expect(dude.can? :woot, TestModel.new).to be true
 
       # Test that it checks if a document is owned by holder
-      target.conditions = {:equals => {:owner => "@holder"}}
+      target.conditions = {:equals => {:owner => "*holder"}}
       policy.save
       expect(dude.can? :woot, TestModel.new).to be true
 
@@ -36,7 +36,7 @@ module Scram
 
     it "holds string permissions" do
       target = Target.new
-      target.conditions = {:equals => { :@target_name =>  "donk"}}
+      target.conditions = {:equals => { :'*target_name' =>  "donk"}}
       target.actions << "woot"
 
       policy = Policy.new

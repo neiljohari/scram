@@ -9,7 +9,7 @@ module Scram
       target = Target.new
       target.actions << "woot"
       target.allow = true
-      target.conditions = {:equals => {:non_existant_field => 3}}
+      target.conditions = {:equals => {:'*non_existant_field' => 3, :non_existant_field => 3}}
       policy.targets << target
 
       policy.save
