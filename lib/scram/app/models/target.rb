@@ -27,8 +27,11 @@ module Scram
     # @param obj [Object] The receiver of the action
     # @return [Boolean] Whether or not holder can action to object
     def can? holder, action, obj
-      return false unless actions.include? action
+      target = target.to_s if target.is_a? Symbol
+      action = action.to_s if action.is_a? Symbol
 
+      return false unless actions.include? action
+      return false if !allow
       if obj.is_a? String # ex: can? user, :view, "peek_bar"
         return obj == conditions[:equals][:@target_name]
         # ex: conditions: {equals: {@target_name: "peek_bar"}}

@@ -34,6 +34,9 @@ module Scram
     # @param obj [Object] The receiver of the action
     # @return [Boolean] Whether or not holder can action to object
     def can? holder, action, obj
+      target = target.to_s if target.is_a? Symbol
+      action = action.to_s if action.is_a? Symbol
+      
       # The following checks prevent unnecessary iteration
       if obj.is_a? String # ex: can? :view, "peek_bar"
         return false if self.model? # policy doesn't handle strings
@@ -42,7 +45,7 @@ module Scram
         return false if self.collection_name != obj.class.name # policy doesn't handle these types of models
       end
 
-      return targets.order_by([[:priority, :asc]]).any? {|target| target.can?(holder, action, obj)}
+      return targets.order_by([[:priority, :desc]]).any? {|target| target.can?(holder, action, obj)}
     end
   end
 end

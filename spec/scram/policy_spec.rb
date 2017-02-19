@@ -6,15 +6,15 @@ module Scram
       policy = Policy.new
       policy.collection_name = TestModel.name # A misc policy for strings
 
-      # Create a target that lets us woot
+      # Create a target that doesn't let us woot
       target1 = Target.new
       target1.actions << "woot"
-      target1.allow = true
+      target1.allow = false
 
-      # Create an even more important target that doesn't let us woot
+      # Create an even more important target that lets us woot
       target2 = Target.new
       target2.actions << "woot"
-      target2.allow = false
+      target2.allow = true
       target2.priority = 1
 
       policy.targets << target1
@@ -22,7 +22,7 @@ module Scram
 
       policy.save
 
-      expect(policy.can? nil, :woot, TestModel.new).to be false
+      expect(policy.can? nil, :woot, TestModel.new).to be true
     end
   end
 end
