@@ -35,7 +35,7 @@ Or install it yourself as:
 
 ### Example Usage
 If you choose to implement Holder into your user class directly, it may look something like the following.
-```
+```ruby
 class User
   ...
   include Scram::Holder
@@ -53,7 +53,7 @@ end
 Now lets add a String permission to display a statistics bar for users like admins. We want to call `user.can? :view, "peek_bar"` and have it return true for admins.
 
 To do this, we'll need to define a non-model Policy (because our object is a string, "peek_bar").
-```
+```ruby
 user = ...
 policy = Scram::Policy.new
 policy.collection_name = "global-strings-policy"
@@ -63,17 +63,17 @@ user.save
 ```
 
 Now we want to add a target that represents the ability to `view "peek_bar"`.
-```
+```ruby
 target = Target.new
-target.conditions = {:equals => { :@target_name =>  "peek_bar"}}
+target.conditions = {:equals => { :'*target_name' =>  "peek_bar"}}
 target.actions << "view"
 policy.targets << target
 policy.save
 ```
 
-This code creates a target which permits viewing if the `@target_name` equals "peek_bar".
+This code creates a target which permits viewing if the `*target_name` equals "peek_bar".
 
-Scram automatically replaces `@target_name` with the action being compared. For example, in `can? :view, "something_else"` Scram would check if `"something_else" == "peek_bar"`.
+Scram automatically replaces `*target_name` with the action being compared. For example, in `can? :view, "something_else"` Scram would check if `"something_else" == "peek_bar"`.
 
 And now we're done! :tada:
 
@@ -101,11 +101,11 @@ user.save
 Now we need a Target in our Policy to let users edit their own Posts.
 ```ruby
 target = Target.new
-target.conditions = {:equals => {:user => "@holder"}}
+target.conditions = {:equals => {:user => "*holder"}}
 target.actions << "edit"
 policy.save
 ```
-What is `@holder`? Well, Scram replaces this special variable with the current user being compared. In `User#scram_compare_value` we return the User's ObjectId, and this is exactly what Scram replaced `@holder` with.
+What is `*holder`? Well, Scram replaces this special variable with the current user being compared. In `User#scram_compare_value` we return the User's ObjectId, and this is exactly what Scram replaced `*holder` with.
 
 So now this Target reads "allow a holder to edit a Post if the user of that Post is the holder". Pretty neat, huh?
 
@@ -134,11 +134,11 @@ Now we no longer need to directly tell our Target to access the user field. Here
 
 ```ruby
 ...
-target.conditions = {:equals => {:@owner => "@holder"}}
+target.conditions = {:equals => {:'*owner' => "*holder"}}
 ...
 ```
 
-Scram is smart enough to realize that any key starting with an `@`, like `@owner`, is a manually defined condition. Now, calling `user.can? :edit, @post` will compare the value returned by the `condition` block to the hash value (which in this case is the Holder).
+Scram is smart enough to realize that any key starting with an `*`, like `*owner`, is a manually defined condition. Now, calling `user.can? :edit, @post` will compare the value returned by the `condition` block to the hash value (which in this case is the Holder).
 
 #### Defining a New Comparator
 You may have noticed from the previous examples that the keys of our Target conditions were things like `equals` and `less_than`. These come from our Comparator definitions (see `Scram::DSL::Definitions::COMPARATORS`).
