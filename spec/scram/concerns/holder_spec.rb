@@ -9,8 +9,7 @@ module Scram
       policy = Policy.new
       policy.collection_name = TestModel.name # A misc policy for strings
       policy.targets << target
-      dude = SimpleHolder.new(policies: [policy]) # This is a test holder
-
+      dude = SimpleHolder.new(policies: [policy]) # This is a test holder, his scram_compare_value by default is "Mr. Holder Guy"
 
       # Check that it tests a field equals something
       target.conditions = {:equals => { :targetable_int =>  3}}
@@ -30,7 +29,7 @@ module Scram
       # Test that it checks if a document is owned by holder
       target.conditions = {:equals => {:owner => "*holder"}}
       policy.save
-      expect(dude.can? :woot, TestModel.new).to be true
+      expect(dude.can? :woot, TestModel.new(owner: "Mr. Holder Guy")).to be true
 
     end
 

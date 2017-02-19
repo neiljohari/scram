@@ -1,5 +1,6 @@
 module Scram::DSL
   # Module for Models to include to be able to define special condition variables in their targets
+  # @note Changes behavior of method_missing! Calling a method prefixed with * will search for scram conditions to invoke
   module ModelConditions
     def self.included(base_class)
       base_class.extend ClassMethods
@@ -22,5 +23,27 @@ module Scram::DSL
       end
     end
 
+    def method_missing(method, *args)
+      if method.to_s.starts_with? "*"
+        condition_name = method.to_s.split("*")[1].to_sym
+        conditions = self.class.scram_conditions
+        if conditions && !conditions[condition_name].nil?
+          return conditions[condition_name].call(obj)
+        end
+      end
+
+      super
+    end
+
+    def respond_to_missing?(method, include_private = false)
+      if method.to_s.starts_with? "*"
+        condition_name = method.to_s.split("*")[1].to_sym
+        conditions = self.class.scram_conditions
+        if conditions && !conditions[condition_name].nil?
+          return true
+        end
+      end
+      super
+    end
   end
 end
