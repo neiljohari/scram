@@ -14,24 +14,42 @@ module Scram
   end
 
   describe Holder do
-    it "holds permissions" do
+    xit "holds model permissions" do
+    end
+
+    it "holds string permissions" do
 
       target = Target.new
       target.conditions = {:equals => { :@target_name =>  "donk"}}
-
-      node = PermissionNode.new
-      node.name = "woot"
-      node.targets << target
+      target.actions << "woot"
 
       policy = Policy.new
       policy.collection_name = "globals" # A misc policy for strings
-      policy.model = false # again, it's for strings
-      policy.permission_nodes << node
+      policy.targets << target
 
       policy.save
 
       dude = SimpleHolder.new(policies: [policy]) # This is a test holder
       expect(dude.can? :woot, :donk).to be true
     end
+
+    it "differentiates model and string policies" do
+      string_policy = Policy.new
+      string_policy.collection_name = "non-existant-model"
+      string_policy.save
+
+      expect(string_policy.model?).to be false
+
+      model_policy = Policy.new
+      model_policy.collection_name = SimpleHolder.name
+      model_policy.save
+
+      puts "THE MODEL POLICY: #{model_policy.model}"
+
+      expect(model_policy.model?).to be true
+
+
+    end
+
   end
 end
