@@ -1,11 +1,15 @@
 module Scram::DSL
+  # DSL Builders
   module Builders
+    # Base class for DSL Builder
+    # Executes initializer block within context of builder
     class Builder
         def initialize(&block)
           instance_exec(&block)
         end
     end
 
+    # TODO: Flatten comparatorbuilder and conditionbuilder into one "DictionaryBuilder"
     class ComparatorBuilder < Builder
       attr_accessor :comparators
 

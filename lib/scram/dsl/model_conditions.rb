@@ -1,5 +1,6 @@
 module Scram::DSL
-  module DSL
+  # Module for Models to include to be able to define special condition variables in their targets
+  module ModelConditions
     def self.included(base_class)
       base_class.extend ClassMethods
     end
@@ -11,7 +12,6 @@ module Scram::DSL
         @scram_conditions = Builders::ConditionBuilder.new(&block).conditions
       end
     end
-
 
   end
 end

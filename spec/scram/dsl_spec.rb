@@ -2,7 +2,7 @@ require "spec_helper"
 
 module Scram
   class SimpleDSLImplementation
-    include Scram::DSL::DSL
+    include Scram::DSL::ModelConditions
 
     attr_accessor :owner
 
@@ -13,7 +13,7 @@ module Scram
     end
   end
 
-  describe Scram::DSL do
+  describe Scram::DSL::ModelConditions do
     it "defines and retrieves conditions" do
       test = SimpleDSLImplementation.new
       test.owner = "bob"
