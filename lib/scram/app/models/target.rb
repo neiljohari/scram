@@ -19,9 +19,9 @@ module Scram
     # Checks if a {Scram::Holder} can perform some action on an object given this target's conditions and allow-stance.
     #
     # Scram allows for special names:
-    #   To make this target applicable to a string, use a key `@target_name` with value of the string permission.
-    #   To compare a value to a holder, use `@holder` for a value. To compare a value to a custom condition defined by {Scram::DSL::Builders::ConditionBuilder}
-    #   use an @-symbol before a key name (this name should match the one defined in your model).
+    #   To make this target applicable to a string, use a key `*target_name` with value of the string permission.
+    #   To compare a value to a holder, use `*holder` for a value. To compare a value to a custom condition defined by {Scram::DSL::Builders::ConditionBuilder}
+    #   use an * before a key name (this name should match the one defined in your model).
     # @param holder [Scram::Holder] The actor
     # @param action [String] What the user is trying to do to obj
     # @param obj [Object] The receiver of the action
