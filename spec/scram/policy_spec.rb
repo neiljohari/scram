@@ -1,14 +1,28 @@
 require "spec_helper"
 
-describe Scram::Policy do
+module Scram
+  describe Scram::Policy do
+    it "prioritizes targets" do
+      policy = Policy.new
+      policy.collection_name = TestModel.name # A misc policy for strings
 
-  context "policy with nodes" do
-    #let(:policy) { FactoryGirl.create(:policy, permission_nodes_count: 5) }
+      # Create a target that lets us woot
+      target1 = Target.new
+      target1.actions << "woot"
+      target1.allow = true
 
-    #it "has permission nodes" do
-    #  expect(policy.permission_nodes.count).to be > 0
-    #end
+      # Create an even more important target that doesn't let us woot
+      target2 = Target.new
+      target2.actions << "woot"
+      target2.allow = false
+      target2.priority = 1
 
+      policy.targets << target1
+      policy.targets << target2
+
+      policy.save
+
+      expect(policy.can? nil, :woot, TestModel.new).to be false
+    end
   end
-
 end
