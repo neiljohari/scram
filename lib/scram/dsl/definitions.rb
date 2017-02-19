@@ -11,7 +11,7 @@ module Scram::DSL
     ## really this is just a mapping between name and method (since ==, >=, etc are all just methods as well)
     COMPARATORS = Builders::ComparatorBuilder.new do
       comparator :equals do |a, b|
-        a==b
+        a == b
       end
 
       comparator :greater_than do |a, b|
