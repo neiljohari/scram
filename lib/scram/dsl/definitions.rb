@@ -15,11 +15,11 @@ module Scram::DSL
       end
 
       comparator :greater_than do |a, b|
-        a>b
+        a > b
       end
 
       comparator :less_than do |a, b|
-        a<b
+        a < b
       end
 
       comparator :includes do |a, b|
