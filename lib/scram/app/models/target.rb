@@ -13,7 +13,6 @@ module Scram
         return obj == conditions[:equals][:@target_name]
         # ex: conditions: {equals: {@target_name: "peek_bar"}}
       else
-        # TODO: Comparators, and dynamic variable checking (and holder comparison)
         conditions.each do |comparator_name, fields_hash|
           comparator = Scram::DSL::Definitions::COMPARATORS[comparator_name]
           fields_hash.each do |field, model_value|
@@ -29,7 +28,6 @@ module Scram
             end
 
             model_value.gsub! "@holder", holder.scram_compare_value if model_value.respond_to?(:gsub!)
-            # TODO: Ensure that holder being replaced is the right thing to do here (regarding document ids vs string representation)
 
             return comparator.call(attribute, model_value)
           end
