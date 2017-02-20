@@ -1,6 +1,6 @@
 module Scram
   # Class representing a Holder of policies through other Holders
-  # @note Implementing classes must implement #aggregate, #policies and #scram_compare_value
+  # @note Implementing classes must implement #aggregates and #scram_compare_value
   module AggregateHolder
     include Holder
 
