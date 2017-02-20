@@ -1,4 +1,6 @@
 module Scram
+  using SymbolExtensions
+
   # Base class to represent a Holder of permissions through policies.
   # @note Implementing classes must implement #policies and #scram_compare_value
   module Holder
@@ -17,12 +19,17 @@ module Scram
     # Checks if this holder can perform some action on an object by checking the Holder's policies
     # @param action [String] What the user is trying to do to obj
     # @param obj [Object] The receiver of the action
-    # @return [Boolean] Whether or not holder can action to object
+    # @return [Boolean] Whether or not holder can action to object. We define a full abstainment as a failure to perform the action.
     def can? action, target
       target = target.to_s if target.is_a? Symbol
-      action = action.to_s if action.is_a? Symbol
+      action = action.to_s
 
-      policies.sort_by{|p| p.priority}.reverse.any? {|p| p.can? self, action, target}
+      policies.sort_by{|p| p.priority}.reverse.each do |policy|
+        opinion = policy.can?(self, action, target)
+        return opinion.to_bool if %i[allow deny].include? opinion
+      end
+
+      return false
     end
 
 
