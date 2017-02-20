@@ -22,7 +22,7 @@ module Scram
       target = target.to_s if target.is_a? Symbol
       action = action.to_s if action.is_a? Symbol
 
-      policies.any? {|p| p.can? self, action, target}
+      policies.sort_by{|p| p.priority}.reverse.any? {|p| p.can? self, action, target}
     end
 
 
