@@ -21,6 +21,12 @@ module Scram
       owner_retrieval_condition = SimpleDSLImplementation.scram_conditions[:owner]
       expect(owner_retrieval_condition.call(test)).to eq("bob")
     end
+
+    it "handles retrieval of condition methods" do
+      test = SimpleDSLImplementation.new
+      test.owner = "bob"
+      expect(test.send("*owner")).to eq("bob")
+    end
   end
 
   describe Scram::DSL::Definitions do
