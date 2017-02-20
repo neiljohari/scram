@@ -23,7 +23,9 @@ Or install it yourself as:
 
 ### Quick Overview of Scram
 - Holder
-  - Scram doesn't force you to use a specific group system. Instead, just include `Holder` into any class which can hold `Policies`. In most cases, your `Holder` will be a `User` model or a `Group` model.
+  - Scram doesn't force you to use a specific group system. Instead, just include `Holder` into any class which can hold `Policies`.
+  - Scram provides a class for objects like Groups through an `AggregateHolder`. This is a class which should be included in anything which holds policies through other holders.
+  - In most cases, your `AggregateHolder` will be a `User` model. Your `Group` model will be a `Holder`. If you don't want to use a group system, then your `User` model will likely be a `Holder`.
 - Policy
   - Policies are used to bundle together permissions.
   - There are 2 kinds of `Policies`: Those for a specific model, and "global" `Policies` for permissions that aren't bound to a specific model.
@@ -48,6 +50,9 @@ class User
   end
 end
 ```
+This sort of system would not include a group system at all (for simplicity). If you want a Group system, have your user include `Scram::AggregateHolder` and then implement `#aggregates` to return your groups (which should be `Holder`s themselves).
+
+We will be providing a full fledge example application of Scram shortly which will include a Group and membership system, and will clarify how the `AggregateHolder` system works. For now, lets see how Scram works in its simplest usage (a user who stores policies just for themselves).
 
 #### Adding a String Permission
 Now lets add a String permission to display a statistics bar for users like admins. We want to call `user.can? :view, "peek_bar"` and have it return true for admins.
