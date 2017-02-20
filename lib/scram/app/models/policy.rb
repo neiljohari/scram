@@ -6,6 +6,8 @@ module Scram
 
     embeds_many :targets
 
+    field :priority, type: Integer, default: 0
+
     validates_presence_of :collection
 
     # @return [String] What this Policy applies to. Usually it will be the name of a Model, but it can also be a String for a "global" policy for non model-bound permissions
@@ -36,7 +38,7 @@ module Scram
     def can? holder, action, obj
       target = target.to_s if target.is_a? Symbol
       action = action.to_s if action.is_a? Symbol
-      
+
       # The following checks prevent unnecessary iteration
       if obj.is_a? String # ex: can? :view, "peek_bar"
         return false if self.model? # policy doesn't handle strings

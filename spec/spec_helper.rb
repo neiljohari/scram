@@ -7,6 +7,7 @@ require 'coveralls'
 Coveralls.wear!
 
 require "scram/test_implementations/simple_holder"
+require "scram/test_implementations/simple_aggregate_holder"
 require "scram/test_implementations/test_model"
 
 Mongoid.load!('./spec/config/mongoid.yml', :test)
