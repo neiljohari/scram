@@ -1,5 +1,6 @@
 require "scram/version"
 require "mongoid"
+require "scram/core_ext/symbol_extensions.rb"
 require "scram/dsl/builders.rb"
 require "scram/dsl/definitions.rb"
 require "scram/dsl/model_conditions.rb"

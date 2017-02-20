@@ -25,26 +25,32 @@ module Scram
     # @param holder [Scram::Holder] The actor
     # @param action [String] What the user is trying to do to obj
     # @param obj [Object] The receiver of the action
-    # @return [Boolean] Whether or not holder can action to object
+    # @return [Symbol] This target's opinion on an action and object. :allow and :deny mean this target explicitly defines
+    #   its opinion, while :abstain means that this Target is not applicable to the action, and so has no opinion.
     def can? holder, action, obj
       target = target.to_s if target.is_a? Symbol
       action = action.to_s if action.is_a? Symbol
 
-      return false unless actions.include? action
-      return false if !allow
+      return :abstain unless actions.include? action
+
       if obj.is_a? String # Handle String permissions with a simple check on the equals field
-        return obj == conditions[:equals][:'*target_name']
-      else # Attempt to prove false by finding a condition or attribute where comparisons fail
+        if obj == conditions[:equals][:'*target_name']
+          return (allow ? :allow : :deny)
+        else
+          return :abstain
+        end
+      else # Attempt to prove non-applicable (abstain) by finding a condition or attribute where comparisons fail
         conditions.each do |comparator_name, fields_hash|
           comparator = Scram::DSL::Definitions::COMPARATORS[comparator_name]
           fields_hash.each do |field, model_value|
             attribute = begin obj.send(field.to_s) rescue return false end
             model_value.gsub! "*holder", holder.scram_compare_value if model_value.respond_to?(:gsub!)
-            return false unless comparator.call(attribute, model_value)
+            return :abstain unless comparator.call(attribute, model_value)
           end
         end
       end
-      return true
+
+      return (allow ? :allow : :deny)
     end
   end
 end

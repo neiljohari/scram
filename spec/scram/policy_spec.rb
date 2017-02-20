@@ -22,7 +22,7 @@ module Scram
 
       policy.save
 
-      expect(policy.can? nil, :woot, TestModel.new).to be true
+      expect(policy.can? nil, :woot, TestModel.new).to be :allow
     end
   end
 end
