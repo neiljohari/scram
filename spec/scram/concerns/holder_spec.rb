@@ -2,6 +2,12 @@ require "spec_helper"
 
 module Scram
   describe Scram::Holder do
+
+    it "cannot be used without an implementation" do
+      expect {UnimplementedHolder.new.policies}.to raise_error(NotImplementedError)
+      expect {UnimplementedHolder.new.scram_compare_value}.to raise_error(NotImplementedError)
+    end
+
     it "holds model permissions" do
       target = Target.new
       target.actions << "woot"
@@ -60,6 +66,35 @@ module Scram
       model_policy.save
 
       expect(model_policy.model?).to be true
+    end
+
+    # TODO: Investigate whether or not it is worth somehow "force" denying through policies. Consider removing policy-priority system, it is currently useless.
+    xit "prioritizes policies" do
+      target1 = Target.new
+      target1.actions << "woot"
+      target1.actions << "zing"
+      target1.allow = false
+
+      policy1 = Policy.new
+      policy1.collection_name = TestModel.name # A misc policy for strings
+      policy1.targets << target1
+
+
+      target2 = Target.new
+      target2.actions << "woot"
+
+      policy2 = Policy.new
+      policy2.collection_name = TestModel.name # A misc policy for strings
+      policy2.priority = 1
+      policy2.targets << target2
+
+      policy1.save
+      policy2.save
+
+      user = SimpleHolder.new(policies: [policy1, policy2])
+      expect(user.can? :woot, TestModel.new).to be true
+      expect(user.can? :donk, TestModel.new).to be false
+      expect(user.can? :zing, TestModel.new).to be true
     end
 
   end

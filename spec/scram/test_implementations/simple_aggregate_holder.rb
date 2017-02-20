@@ -1,6 +1,10 @@
 require "scram/concerns/aggregate_holder"
 
 module Scram
+  class UnimplementedAggregateHolder
+    include AggregateHolder
+  end
+
   class SimpleAggregateHolder
     include AggregateHolder
 

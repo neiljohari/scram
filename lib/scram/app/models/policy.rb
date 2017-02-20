@@ -6,9 +6,10 @@ module Scram
 
     embeds_many :targets
 
-    field :priority, type: Integer, default: 0
-
     validates_presence_of :collection
+
+    # @return [Integer] Priority to allow this policy to override another conflicting {Scram::Policy} opinion.
+    field :priority, type: Integer, default: 0
 
     # @return [String] What this Policy applies to. Usually it will be the name of a Model, but it can also be a String for a "global" policy for non model-bound permissions
     field :collection_name, type: String

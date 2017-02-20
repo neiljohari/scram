@@ -2,6 +2,13 @@ require "spec_helper"
 
 module Scram
   describe Scram::AggregateHolder do
+
+    it "cannot be used without an implementation" do
+      expect {UnimplementedAggregateHolder.new.policies}.to raise_error(NotImplementedError)
+      expect {UnimplementedAggregateHolder.new.aggregates}.to raise_error(NotImplementedError)
+      expect {UnimplementedAggregateHolder.new.scram_compare_value}.to raise_error(NotImplementedError)
+    end
+
     it "uses permissions from aggregates" do
       target1 = Target.new
       target1.actions << "woot"
