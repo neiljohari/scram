@@ -1,6 +1,10 @@
 require "scram/concerns/holder"
 
 module Scram
+  class UnimplementedHolder
+    include Holder
+  end
+
   class SimpleHolder
     include Holder
 
