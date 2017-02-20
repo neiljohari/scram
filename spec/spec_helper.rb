@@ -3,6 +3,9 @@ require "scram"
 require 'database_cleaner'
 require 'support/factory_girl'
 
+require 'coveralls'
+Coveralls.wear!
+
 require "scram/test_implementations/simple_holder"
 require "scram/test_implementations/test_model"
 
