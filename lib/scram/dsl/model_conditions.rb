@@ -23,6 +23,7 @@ module Scram::DSL
       end
     end
 
+    # Methods starting with an asterisk are tested for DSL defined conditions
     def method_missing(method, *args)
       if method.to_s.starts_with? "*"
         condition_name = method.to_s.split("*")[1].to_sym
@@ -31,10 +32,10 @@ module Scram::DSL
           return conditions[condition_name].call(obj)
         end
       end
-
       super
     end
 
+    # Allow DSL condition methods to show up as methods (i.e fix #respond_to?)
     def respond_to_missing?(method, include_private = false)
       if method.to_s.starts_with? "*"
         condition_name = method.to_s.split("*")[1].to_sym

@@ -36,6 +36,7 @@ module Scram
       target.conditions = {:equals => {:owner => "*holder"}}
       policy.save
       expect(dude.can? :woot, TestModel.new(owner: "Mr. Holder Guy")).to be true
+      expect(dude.can? :woot, TestModel.new(owner: "Mr. Holder Dude")).to be false
 
     end
 
@@ -52,6 +53,7 @@ module Scram
 
       dude = SimpleHolder.new(policies: [policy]) # This is a test holder
       expect(dude.can? :woot, :donk).to be true
+      expect(dude.can? :woot, :donkers).to be false
     end
 
     it "differentiates model and string policies" do

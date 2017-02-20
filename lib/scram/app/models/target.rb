@@ -1,5 +1,5 @@
 module Scram
-  # A broad Target interface to scope in a {Scram::Policy}
+  # A broad Target interface to scope in a {Scram::Policy}. A target must either whitelist or deny through its allow attribute.
   class Target
     include Mongoid::Document
     embedded_in :policy
@@ -13,8 +13,13 @@ module Scram
     # @return [Integer] Priority to allow this target to override another conflicting {Scram::Target} opinion.
     field :priority, type: Integer, default: 0
 
-    # @return [Boolean] This target's modification onto a permission (allow or deny)
+    # @return [Boolean] This target's modification onto a permission (allow or deny), i.e. its type
     field :allow, type: Boolean, default: true
+
+    # @return [Symbol] The type of this target (either permissive as allow or deny)
+    def target_type
+      allow ? :allow : :deny
+    end
 
     # Checks if a {Scram::Holder} can perform some action on an object given this target's conditions and allow-stance.
     #
@@ -28,29 +33,38 @@ module Scram
     # @return [Symbol] This target's opinion on an action and object. :allow and :deny mean this target explicitly defines
     #   its opinion, while :abstain means that this Target is not applicable to the action, and so has no opinion.
     def can? holder, action, obj
-      target = target.to_s if target.is_a? Symbol
+      obj = obj.to_s if obj.is_a? Symbol
       action = action.to_s if action.is_a? Symbol
 
       return :abstain unless actions.include? action
 
-      if obj.is_a? String # Handle String permissions with a simple check on the equals field
+      # Handle String permissions
+      if obj.is_a? String
         if obj == conditions[:equals][:'*target_name']
-          return (allow ? :allow : :deny)
+          return target_type
         else
           return :abstain
         end
-      else # Attempt to prove non-applicable (abstain) by finding a condition or attribute where comparisons fail
-        conditions.each do |comparator_name, fields_hash|
-          comparator = Scram::DSL::Definitions::COMPARATORS[comparator_name]
-          fields_hash.each do |field, model_value|
-            attribute = begin obj.send(field.to_s) rescue return false end
-            model_value.gsub! "*holder", holder.scram_compare_value if model_value.respond_to?(:gsub!)
-            return :abstain unless comparator.call(attribute, model_value)
-          end
+      end
+
+      # Model permissions
+      # Attempts to abstain by finding a condition or attribute where comparisons fail (and thus this target would be unapplicable)
+      conditions.each do |comparator_name, fields_hash|
+        comparator = Scram::DSL::Definitions::COMPARATORS[comparator_name]
+        fields_hash.each do |field, model_value|
+          # Either gets the model's attribute or gets the DSL defined condition.
+          # Abstains if neither can be reached
+          attribute = begin obj.send(field.to_s) rescue return :abstain end
+
+          # Special value substitutions
+          model_value.gsub! "*holder", holder.scram_compare_value if model_value.respond_to?(:gsub!)
+
+          # Abstain if this target doesn't apply to obj in any of its attributes
+          return :abstain unless comparator.call(attribute, model_value)
         end
       end
 
-      return (allow ? :allow : :deny)
+      return target_type
     end
   end
 end
