@@ -29,5 +29,30 @@ module Scram
       expect(user.can? :donk, TestModel.new).to be true
       expect(user.can? :zing, TestModel.new).to be false
     end
+
+    it "uses the aggregate holder compare value for ownership checking" do
+      target = Target.new
+      target.actions << "woot"
+      target.conditions = {:equals => {:owner => "*holder"}}
+
+      policy = Policy.new
+      policy.collection_name = TestModel.name # A misc policy for strings
+      policy.targets << target
+      holder = SimpleHolder.new(policies: [policy])
+
+      user = SimpleAggregateHolder.new(aggregates: [holder])
+      expect(user.can? :woot, TestModel.new(owner: "Mr. Aggregate Holder Guy")).to be true
+      expect(user.can? :woot, TestModel.new(owner: "Mr. Holder Guy")).to be false
+
+      another_user = SimpleAggregateHolder.new(aggregates: [])
+      class << another_user
+        def scram_compare_value
+          "Mr. Aggregate Holder Guy Jr."
+        end
+      end
+
+      expect(another_user.can? :woot, TestModel.new(owner: "Mr. Aggregate Holder Guy")).to be false
+
+    end
   end
 end
