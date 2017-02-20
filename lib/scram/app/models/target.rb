@@ -54,7 +54,7 @@ module Scram
         fields_hash.each do |field, model_value|
           # Either gets the model's attribute or gets the DSL defined condition.
           # Abstains if neither can be reached
-          attribute = begin obj.send(field.to_s) rescue return :abstain end
+          attribute = begin obj.send(:"#{field}") rescue return :abstain end
 
           # Special value substitutions
           model_value.gsub! "*holder", holder.scram_compare_value if model_value.respond_to?(:gsub!)
