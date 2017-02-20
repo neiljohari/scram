@@ -50,7 +50,7 @@ module Scram
 
     it "differentiates model and string policies" do
       string_policy = Policy.new
-      string_policy.collection_name = "non-existant-model"
+      string_policy.collection_name = "non-existent-model"
       string_policy.save
 
       expect(string_policy.model?).to be false
