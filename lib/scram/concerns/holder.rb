@@ -24,7 +24,8 @@ module Scram
       target = target.to_s if target.is_a? Symbol
       action = action.to_s
 
-      policies.sort_by{|p| p.priority}.reverse.each do |policy|
+      # Checks policies in priority order for explicit allow or deny.
+      policies.sort_by(&:priority).reverse.each do |policy|
         opinion = policy.can?(self, action, target)
         return opinion.to_bool if %i[allow deny].include? opinion
       end

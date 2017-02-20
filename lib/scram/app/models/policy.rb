@@ -38,17 +38,18 @@ module Scram
     # @return [Symbol] This policy's opinion on an action and object. :allow and :deny mean this policy has a target who explicitly defines
     #   its opinion, while :abstain means that none of the targets are applicable to the action, and so has no opinion.
     def can? holder, action, obj
-      target = target.to_s if target.is_a? Symbol
+      obj = obj.to_s if obj.is_a? Symbol
       action = action.to_s
 
-      # The following checks prevent unnecessary iteration
-      if obj.is_a? String # ex: can? :view, "peek_bar"
-        return :abstain if self.model? # policy doesn't handle strings
-      else                # ex: can? :edit, @model_instance
-        return :abstain if !self.model? # policy doesn't handle models
-        return :abstain if self.collection_name != obj.class.name # policy doesn't handle these types of models
+      # Abstain if policy doesn't apply to the obj
+      if obj.is_a? String # String permissions
+        return :abstain if self.model? # abstain if policy doesn't handle strings
+      else                #
+        return :abstain if !self.model? # abstain if policy doesn't handle models
+        return :abstain if self.collection_name != obj.class.name # abstain if policy doesn't handle these types of models
       end
 
+      # Checks targets in priority order for explicit allow or deny.
       targets.order_by([[:priority, :desc]]).each do |target|
         opinion = target.can?(holder, action, obj)
         return opinion if %i[allow deny].include? opinion
