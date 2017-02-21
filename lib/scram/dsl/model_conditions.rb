@@ -29,7 +29,6 @@ module Scram::DSL
         condition_name = method.to_s.split("*")[1].to_sym
         conditions = self.class.scram_conditions
         if conditions && !conditions[condition_name].nil?
-          puts "RETURNING A CONDITION FROM MISSING"
           return conditions[condition_name].call(self)
         end
       end
