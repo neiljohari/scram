@@ -34,7 +34,7 @@ module Scram
     #   its opinion, while :abstain means that this Target is not applicable to the action, and so has no opinion.
     def can? holder, action, obj
       obj = obj.to_s if obj.is_a? Symbol
-      action = action.to_s if action.is_a? Symbol
+      action = action.to_s
 
       return :abstain unless actions.include? action
 
@@ -50,7 +50,7 @@ module Scram
       # Model permissions
       # Attempts to abstain by finding a condition or attribute where comparisons fail (and thus this target would be unapplicable)
       conditions.each do |comparator_name, fields_hash|
-        comparator = Scram::DSL::Definitions::COMPARATORS[comparator_name]
+        comparator = Scram::DSL::Definitions::COMPARATORS[comparator_name.to_sym]
         fields_hash.each do |field, model_value|
           # Either gets the model's attribute or gets the DSL defined condition.
           # Abstains if neither can be reached
