@@ -2,7 +2,7 @@ module Scram
   # A broad Target interface to scope in a {Scram::Policy}. A target must either whitelist or deny through its allow attribute.
   class Target
     include Mongoid::Document
-    embedded_in :policy
+    embedded_in :policy, class_name: "Scram::Policy"
 
     # @return [Array] Actions which this target applies to
     field :actions, type: Array, default: []

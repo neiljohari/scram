@@ -2,9 +2,8 @@ module Scram
   # Model to represent a Holder's permission policy
   class Policy
     include Mongoid::Document
-    store_in collection: 'scram_policies'
 
-    embeds_many :targets
+    embeds_many :targets, class_name: "Scram::Target"
 
     validates_presence_of :collection_name
 
