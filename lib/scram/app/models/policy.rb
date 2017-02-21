@@ -6,7 +6,7 @@ module Scram
 
     embeds_many :targets
 
-    validates_presence_of :collection
+    validates_presence_of :collection_name
 
     # @return [Integer] Priority to allow this policy to override another conflicting {Scram::Policy} opinion.
     field :priority, type: Integer, default: 0
