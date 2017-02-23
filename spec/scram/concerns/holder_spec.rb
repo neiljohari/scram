@@ -13,7 +13,7 @@ module Scram
       target.actions << "woot"
 
       policy = Policy.new
-      policy.collection_name = TestModel.name # A misc policy for strings
+      policy.context = TestModel.name # A misc policy for strings
       policy.targets << target
       dude = SimpleHolder.new(policies: [policy]) # This is a test holder, his scram_compare_value by default is "Mr. Holder Guy"
 
@@ -46,7 +46,7 @@ module Scram
       target.actions << "woot"
 
       policy = Policy.new
-      policy.collection_name = "globals" # A misc policy for strings
+      policy.context = "globals" # A misc policy for strings
       policy.targets << target
 
       policy.save
@@ -58,13 +58,13 @@ module Scram
 
     it "differentiates model and string policies" do
       string_policy = Policy.new
-      string_policy.collection_name = "non-existent-model"
+      string_policy.context = "non-existent-model"
       string_policy.save
 
       expect(string_policy.model?).to be false
 
       model_policy = Policy.new
-      model_policy.collection_name = SimpleHolder.name
+      model_policy.context = SimpleHolder.name
       model_policy.save
 
       expect(model_policy.model?).to be true
@@ -77,7 +77,7 @@ module Scram
       target1.actions << "zing"
 
       policy1 = Policy.new
-      policy1.collection_name = TestModel.name # A misc policy for strings
+      policy1.context = TestModel.name # A misc policy for strings
       policy1.targets << target1
 
       # Deny woot in higher priority policy
@@ -86,7 +86,7 @@ module Scram
       target2.allow = false
 
       policy2 = Policy.new
-      policy2.collection_name = TestModel.name # A misc policy for strings
+      policy2.context = TestModel.name # A misc policy for strings
       policy2.priority = 1
       policy2.targets << target2
 

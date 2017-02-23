@@ -13,14 +13,14 @@ module Scram
       target1 = Target.new
       target1.actions << "woot"
       policy1 = Policy.new
-      policy1.collection_name = TestModel.name # A misc policy for strings
+      policy1.context = TestModel.name # A misc policy for strings
       policy1.targets << target1
       holder1 = SimpleHolder.new(policies: [policy1])
 
       target2 = Target.new
       target2.actions << "donk"
       policy2 = Policy.new
-      policy2.collection_name = TestModel.name # A misc policy for strings
+      policy2.context = TestModel.name # A misc policy for strings
       policy2.targets << target2
       holder2 = SimpleHolder.new(policies: [policy2])
 
@@ -36,7 +36,7 @@ module Scram
       target.conditions = {:equals => {:owner => "*holder"}}
 
       policy = Policy.new
-      policy.collection_name = TestModel.name # A misc policy for strings
+      policy.context = TestModel.name # A misc policy for strings
       policy.targets << target
       holder = SimpleHolder.new(policies: [policy])
 

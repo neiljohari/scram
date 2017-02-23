@@ -4,7 +4,7 @@ module Scram
   describe Scram::Target do
     it "returns false when a field doesn't apply" do
       policy = Policy.new
-      policy.collection_name = TestModel.name
+      policy.context = TestModel.name
 
       target = Target.new
       target.actions << "woot"
