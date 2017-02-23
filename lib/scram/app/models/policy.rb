@@ -5,13 +5,13 @@ module Scram
 
     embeds_many :targets, class_name: "Scram::Target"
 
-    validates_presence_of :collection_name
+    validates_presence_of :context
 
     # @return [Integer] Priority to allow this policy to override another conflicting {Scram::Policy} opinion.
     field :priority, type: Integer, default: 0
 
     # @return [String] What this Policy applies to. Usually it will be the name of a Model, but it can also be a String for a "global" policy for non model-bound permissions
-    field :collection_name, type: String
+    field :context, type: String
 
     # Helper method to easily tell if this policy is bound to a model
     # @note Unnecessary since we can just call model.nil?, but it is helpful nonetheless
@@ -24,7 +24,7 @@ module Scram
     # @return [Object, nil] An object, likely a {::Mongoid::Document}, that this policy is bound to. nil if there is none.
     def model
       begin
-        return Module.const_get(collection_name)
+        return Module.const_get(context)
       rescue NameError
         return nil
       end
@@ -45,7 +45,7 @@ module Scram
         return :abstain if self.model? # abstain if policy doesn't handle strings
       else                #
         return :abstain if !self.model? # abstain if policy doesn't handle models
-        return :abstain if self.collection_name != obj.class.name # abstain if policy doesn't handle these types of models
+        return :abstain if self.context != obj.class.name # abstain if policy doesn't handle these types of models
       end
 
       # Checks targets in priority order for explicit allow or deny.
