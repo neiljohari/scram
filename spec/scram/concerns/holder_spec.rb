@@ -46,7 +46,7 @@ module Scram
       target.actions << "woot"
 
       policy = Policy.new
-      policy.context = "globals" # A misc policy for strings
+      policy.name = "globals" # A misc policy for strings, context wil be nil!
       policy.targets << target
 
       policy.save
