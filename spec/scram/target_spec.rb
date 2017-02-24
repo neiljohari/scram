@@ -18,4 +18,22 @@ module Scram
       expect(dude.can? :woot, TestModel.new).to be false
     end
   end
+
+  describe Scram::Target do
+    it "allows model-wide permissions" do
+      policy = Policy.new
+      policy.context = TestModel.name
+
+      target = Target.new
+      target.actions << "woot"
+      target.allow = true
+      target.conditions = {} # Allow the actions on _anything_, including a passed in class
+      policy.targets << target
+
+      policy.save
+
+      dude = SimpleHolder.new(policies: [policy])
+      expect(dude.can? :woot, TestModel).to be true
+    end
+  end
 end
