@@ -34,6 +34,7 @@ module Scram
 
       dude = SimpleHolder.new(policies: [policy])
       expect(dude.can? :woot, TestModel).to be true
+      expect(dude.can? :woot, TestModel.new).to be true # you can check based off an instance as well
     end
   end
 end
