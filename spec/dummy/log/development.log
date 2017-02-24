@@ -1,0 +1,11 @@
+MONGODB | Topology type 'unknown' initializing.
+MONGODB | Server localhost:27017 initializing.
+MONGODB | Topology type 'unknown' changed to type 'single'.
+MONGODB | Server description for localhost:27017 changed from 'unknown' to 'standalone'.
+MONGODB | There was a change in the members of the 'single' topology.
+MONGODB | localhost:27017 | scram_dummy_development.find | STARTED | {"find"=>"scram_policies", "filter"=>{}, "sort"=>{"_id"=>1}, "limit"=>1, "singleBatch"=>true}
+MONGODB | localhost:27017 | scram_dummy_development.find | SUCCEEDED | 0.010178s
+MONGODB | localhost:27017 | scram_dummy_development.insert | STARTED | {"insert"=>"scram_policies", "documents"=>[{"_id"=>BSON::ObjectId('58b0192c366a3522114db9e1'), "priority"=>5, "context"=>"Test"}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_development.insert | SUCCEEDED | 0.09737699999999999s
+MONGODB | localhost:27017 | scram_dummy_development.update | STARTED | {"update"=>"scram_policies", "updates"=>[{"q"=>{"_id"=>BSON::ObjectId('58b0192c366a3522114db9e1')}, "u"=>{"$set"=>{"context"=>"dsf"}}, "multi"=>false, "upsert"=>false}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_development.update | SUCCEEDED | 0.045752999999999995s

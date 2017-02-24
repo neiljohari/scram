@@ -1,0 +1,164 @@
+MONGODB | Topology type 'unknown' initializing.
+MONGODB | Server localhost:27017 initializing.
+MONGODB | Topology type 'unknown' changed to type 'single'.
+MONGODB | Server description for localhost:27017 changed from 'unknown' to 'standalone'.
+MONGODB | There was a change in the members of the 'single' topology.
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.021963s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.00048300000000000003s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.000507s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.000938s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.002137s
+MONGODB | localhost:27017 | scram_dummy_test.insert | STARTED | {"insert"=>"scram_policies", "documents"=>[{"_id"=>BSON::ObjectId('58b01c09366a352e0c467408'), "priority"=>0, "context"=>"Scram::TestModel", "targets"=>[{"_id"=>BSON::ObjectId('58b01c09366a352e0c467409'), "actions"=>["woot"], "conditions"=>{"equals"=>...
+MONGODB | localhost:27017 | scram_dummy_test.insert | SUCCEEDED | 0.055528s
+MONGODB | localhost:27017 | scram_dummy_test.update | STARTED | {"update"=>"scram_policies", "updates"=>[{"q"=>{"_id"=>BSON::ObjectId('58b01c09366a352e0c467408')}, "u"=>{"$set"=>{"targets.0.conditions"=>{"less_than"=>{"targetable_int"=>4}}}}, "multi"=>false, "upsert"=>false}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.update | SUCCEEDED | 0.000517s
+MONGODB | localhost:27017 | scram_dummy_test.update | STARTED | {"update"=>"scram_policies", "updates"=>[{"q"=>{"_id"=>BSON::ObjectId('58b01c09366a352e0c467408')}, "u"=>{"$set"=>{"targets.0.conditions"=>{"includes"=>{"targetable_array"=>"a"}}}}, "multi"=>false, "upsert"=>false}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.update | SUCCEEDED | 0.0005849999999999999s
+MONGODB | localhost:27017 | scram_dummy_test.update | STARTED | {"update"=>"scram_policies", "updates"=>[{"q"=>{"_id"=>BSON::ObjectId('58b01c09366a352e0c467408')}, "u"=>{"$set"=>{"targets.0.conditions"=>{"equals"=>{"owner"=>"*holder"}}}}, "multi"=>false, "upsert"=>false}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.update | SUCCEEDED | 0.00175s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.002373s
+MONGODB | localhost:27017 | scram_dummy_test.delete | STARTED | {"delete"=>"scram_policies", "deletes"=>[{"q"=>{}, "limit"=>0}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.delete | SUCCEEDED | 0.003241s
+MONGODB | localhost:27017 | scram_dummy_test.insert | STARTED | {"insert"=>"scram_policies", "documents"=>[{"_id"=>BSON::ObjectId('58b01c09366a352e0c46740a'), "priority"=>0, "context"=>"globals", "targets"=>[{"_id"=>BSON::ObjectId('58b01c09366a352e0c46740b'), "actions"=>["woot"], "conditions"=>{"equals"=>{"*target...
+MONGODB | localhost:27017 | scram_dummy_test.insert | SUCCEEDED | 0.000949s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.000536s
+MONGODB | localhost:27017 | scram_dummy_test.delete | STARTED | {"delete"=>"scram_policies", "deletes"=>[{"q"=>{}, "limit"=>0}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.delete | SUCCEEDED | 0.000686s
+MONGODB | localhost:27017 | scram_dummy_test.insert | STARTED | {"insert"=>"scram_policies", "documents"=>[{"_id"=>BSON::ObjectId('58b01c09366a352e0c46740c'), "priority"=>0, "context"=>"non-existent-model"}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.insert | SUCCEEDED | 0.000456s
+MONGODB | localhost:27017 | scram_dummy_test.insert | STARTED | {"insert"=>"scram_policies", "documents"=>[{"_id"=>BSON::ObjectId('58b01c09366a352e0c46740d'), "priority"=>0, "context"=>"Scram::SimpleHolder"}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.insert | SUCCEEDED | 0.000898s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.00043900000000000005s
+MONGODB | localhost:27017 | scram_dummy_test.delete | STARTED | {"delete"=>"scram_policies", "deletes"=>[{"q"=>{}, "limit"=>0}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.delete | SUCCEEDED | 0.0009860000000000001s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.000553s
+MONGODB | localhost:27017 | scram_dummy_test.delete | STARTED | {"delete"=>"scram_policies", "deletes"=>[{"q"=>{}, "limit"=>0}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.delete | SUCCEEDED | 0.000535s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.000784s
+MONGODB | localhost:27017 | scram_dummy_test.delete | STARTED | {"delete"=>"scram_policies", "deletes"=>[{"q"=>{}, "limit"=>0}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.delete | SUCCEEDED | 0.00030900000000000003s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.000458s
+MONGODB | localhost:27017 | scram_dummy_test.delete | STARTED | {"delete"=>"scram_policies", "deletes"=>[{"q"=>{}, "limit"=>0}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.delete | SUCCEEDED | 0.000708s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.0013119999999999998s
+MONGODB | localhost:27017 | scram_dummy_test.delete | STARTED | {"delete"=>"scram_policies", "deletes"=>[{"q"=>{}, "limit"=>0}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.delete | SUCCEEDED | 0.002044s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.000471s
+MONGODB | localhost:27017 | scram_dummy_test.delete | STARTED | {"delete"=>"scram_policies", "deletes"=>[{"q"=>{}, "limit"=>0}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.delete | SUCCEEDED | 0.000527s
+MONGODB | localhost:27017 | scram_dummy_test.insert | STARTED | {"insert"=>"scram_policies", "documents"=>[{"_id"=>BSON::ObjectId('58b01c09366a352e0c46740e'), "priority"=>0, "context"=>"Scram::TestModel", "targets"=>[{"_id"=>BSON::ObjectId('58b01c09366a352e0c46740f'), "actions"=>["woot"], "conditions"=>{}, "priori...
+MONGODB | localhost:27017 | scram_dummy_test.insert | SUCCEEDED | 0.007477s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.000941s
+MONGODB | localhost:27017 | scram_dummy_test.delete | STARTED | {"delete"=>"scram_policies", "deletes"=>[{"q"=>{}, "limit"=>0}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.delete | SUCCEEDED | 0.0008990000000000001s
+MONGODB | localhost:27017 | scram_dummy_test.insert | STARTED | {"insert"=>"scram_policies", "documents"=>[{"_id"=>BSON::ObjectId('58b01c09366a352e0c467411'), "priority"=>0, "context"=>"Scram::TestModel", "targets"=>[{"_id"=>BSON::ObjectId('58b01c09366a352e0c467412'), "actions"=>["woot"], "conditions"=>{"equals"=>...
+MONGODB | localhost:27017 | scram_dummy_test.insert | SUCCEEDED | 0.000699s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.000742s
+MONGODB | localhost:27017 | scram_dummy_test.delete | STARTED | {"delete"=>"scram_policies", "deletes"=>[{"q"=>{}, "limit"=>0}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.delete | SUCCEEDED | 0.000656s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.001636s
+MONGODB | localhost:27017 | scram_dummy_test.delete | STARTED | {"delete"=>"scram_policies", "deletes"=>[{"q"=>{}, "limit"=>0}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.delete | SUCCEEDED | 0.000836s
+MONGODB | Topology type 'unknown' initializing.
+MONGODB | Server localhost:27017 initializing.
+MONGODB | Topology type 'unknown' changed to type 'single'.
+MONGODB | Server description for localhost:27017 changed from 'unknown' to 'standalone'.
+MONGODB | There was a change in the members of the 'single' topology.
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.0012319999999999998s
+MONGODB | localhost:27017 | scram_dummy_test.delete | STARTED | {"delete"=>"scram_policies", "deletes"=>[{"q"=>{}, "limit"=>0}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.delete | SUCCEEDED | 0.017854000000000002s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.0007419999999999999s
+MONGODB | localhost:27017 | scram_dummy_test.delete | STARTED | {"delete"=>"scram_policies", "deletes"=>[{"q"=>{}, "limit"=>0}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.delete | SUCCEEDED | 0.0008719999999999999s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.001075s
+MONGODB | localhost:27017 | scram_dummy_test.delete | STARTED | {"delete"=>"scram_policies", "deletes"=>[{"q"=>{}, "limit"=>0}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.delete | SUCCEEDED | 0.002242s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.000911s
+MONGODB | localhost:27017 | scram_dummy_test.delete | STARTED | {"delete"=>"scram_policies", "deletes"=>[{"q"=>{}, "limit"=>0}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.delete | SUCCEEDED | 0.000384s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.002951s
+MONGODB | localhost:27017 | scram_dummy_test.delete | STARTED | {"delete"=>"scram_policies", "deletes"=>[{"q"=>{}, "limit"=>0}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.delete | SUCCEEDED | 0.042003s
+MONGODB | localhost:27017 | scram_dummy_test.insert | STARTED | {"insert"=>"scram_policies", "documents"=>[{"_id"=>BSON::ObjectId('58b01c30366a352fe24176d6'), "priority"=>0, "context"=>"Scram::TestModel", "targets"=>[{"_id"=>BSON::ObjectId('58b01c30366a352fe24176d7'), "actions"=>["woot"], "conditions"=>{"equals"=>...
+MONGODB | localhost:27017 | scram_dummy_test.insert | SUCCEEDED | 0.0016899999999999999s
+MONGODB | localhost:27017 | scram_dummy_test.update | STARTED | {"update"=>"scram_policies", "updates"=>[{"q"=>{"_id"=>BSON::ObjectId('58b01c30366a352fe24176d6')}, "u"=>{"$set"=>{"targets.0.conditions"=>{"less_than"=>{"targetable_int"=>4}}}}, "multi"=>false, "upsert"=>false}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.update | SUCCEEDED | 0.000614s
+MONGODB | localhost:27017 | scram_dummy_test.update | STARTED | {"update"=>"scram_policies", "updates"=>[{"q"=>{"_id"=>BSON::ObjectId('58b01c30366a352fe24176d6')}, "u"=>{"$set"=>{"targets.0.conditions"=>{"includes"=>{"targetable_array"=>"a"}}}}, "multi"=>false, "upsert"=>false}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.update | SUCCEEDED | 0.001021s
+MONGODB | localhost:27017 | scram_dummy_test.update | STARTED | {"update"=>"scram_policies", "updates"=>[{"q"=>{"_id"=>BSON::ObjectId('58b01c30366a352fe24176d6')}, "u"=>{"$set"=>{"targets.0.conditions"=>{"equals"=>{"owner"=>"*holder"}}}}, "multi"=>false, "upsert"=>false}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.update | SUCCEEDED | 0.003666s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.000625s
+MONGODB | localhost:27017 | scram_dummy_test.delete | STARTED | {"delete"=>"scram_policies", "deletes"=>[{"q"=>{}, "limit"=>0}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.delete | SUCCEEDED | 0.001557s
+MONGODB | localhost:27017 | scram_dummy_test.insert | STARTED | {"insert"=>"scram_policies", "documents"=>[{"_id"=>BSON::ObjectId('58b01c30366a352fe24176d8'), "priority"=>0, "context"=>"globals", "targets"=>[{"_id"=>BSON::ObjectId('58b01c30366a352fe24176d9'), "actions"=>["woot"], "conditions"=>{"equals"=>{"*target...
+MONGODB | localhost:27017 | scram_dummy_test.insert | SUCCEEDED | 0.000954s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.001319s
+MONGODB | localhost:27017 | scram_dummy_test.delete | STARTED | {"delete"=>"scram_policies", "deletes"=>[{"q"=>{}, "limit"=>0}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.delete | SUCCEEDED | 0.000657s
+MONGODB | localhost:27017 | scram_dummy_test.insert | STARTED | {"insert"=>"scram_policies", "documents"=>[{"_id"=>BSON::ObjectId('58b01c30366a352fe24176da'), "priority"=>0, "context"=>"non-existent-model"}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.insert | SUCCEEDED | 0.000455s
+MONGODB | localhost:27017 | scram_dummy_test.insert | STARTED | {"insert"=>"scram_policies", "documents"=>[{"_id"=>BSON::ObjectId('58b01c30366a352fe24176db'), "priority"=>0, "context"=>"Scram::SimpleHolder"}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.insert | SUCCEEDED | 0.000891s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.000673s
+MONGODB | localhost:27017 | scram_dummy_test.delete | STARTED | {"delete"=>"scram_policies", "deletes"=>[{"q"=>{}, "limit"=>0}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.delete | SUCCEEDED | 0.000655s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.003287s
+MONGODB | localhost:27017 | scram_dummy_test.delete | STARTED | {"delete"=>"scram_policies", "deletes"=>[{"q"=>{}, "limit"=>0}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.delete | SUCCEEDED | 0.000872s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.009947s
+MONGODB | localhost:27017 | scram_dummy_test.delete | STARTED | {"delete"=>"scram_policies", "deletes"=>[{"q"=>{}, "limit"=>0}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.delete | SUCCEEDED | 0.0013340000000000001s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.000945s
+MONGODB | localhost:27017 | scram_dummy_test.delete | STARTED | {"delete"=>"scram_policies", "deletes"=>[{"q"=>{}, "limit"=>0}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.delete | SUCCEEDED | 0.0008860000000000001s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.002295s
+MONGODB | localhost:27017 | scram_dummy_test.delete | STARTED | {"delete"=>"scram_policies", "deletes"=>[{"q"=>{}, "limit"=>0}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.delete | SUCCEEDED | 0.0007740000000000001s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.0011439999999999998s
+MONGODB | localhost:27017 | scram_dummy_test.delete | STARTED | {"delete"=>"scram_policies", "deletes"=>[{"q"=>{}, "limit"=>0}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.delete | SUCCEEDED | 0.001594s
+MONGODB | localhost:27017 | scram_dummy_test.insert | STARTED | {"insert"=>"scram_policies", "documents"=>[{"_id"=>BSON::ObjectId('58b01c30366a352fe24176dc'), "priority"=>0, "context"=>"Scram::TestModel", "targets"=>[{"_id"=>BSON::ObjectId('58b01c30366a352fe24176dd'), "actions"=>["woot"], "conditions"=>{}, "priori...
+MONGODB | localhost:27017 | scram_dummy_test.insert | SUCCEEDED | 0.00076s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.003355s
+MONGODB | localhost:27017 | scram_dummy_test.delete | STARTED | {"delete"=>"scram_policies", "deletes"=>[{"q"=>{}, "limit"=>0}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.delete | SUCCEEDED | 0.000544s
+MONGODB | localhost:27017 | scram_dummy_test.insert | STARTED | {"insert"=>"scram_policies", "documents"=>[{"_id"=>BSON::ObjectId('58b01c30366a352fe24176df'), "priority"=>0, "context"=>"Scram::TestModel", "targets"=>[{"_id"=>BSON::ObjectId('58b01c30366a352fe24176e0'), "actions"=>["woot"], "conditions"=>{"equals"=>...
+MONGODB | localhost:27017 | scram_dummy_test.insert | SUCCEEDED | 0.008949s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.001104s
+MONGODB | localhost:27017 | scram_dummy_test.delete | STARTED | {"delete"=>"scram_policies", "deletes"=>[{"q"=>{}, "limit"=>0}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.delete | SUCCEEDED | 0.0012159999999999999s
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | STARTED | {"listCollections"=>1, "cursor"=>{}, "filter"=>{:name=>{"$not"=>/system\.|\$/}}}
+MONGODB | localhost:27017 | scram_dummy_test.listCollections | SUCCEEDED | 0.0008799999999999999s
+MONGODB | localhost:27017 | scram_dummy_test.delete | STARTED | {"delete"=>"scram_policies", "deletes"=>[{"q"=>{}, "limit"=>0}], "ordered"=>true}
+MONGODB | localhost:27017 | scram_dummy_test.delete | SUCCEEDED | 0.001619s
