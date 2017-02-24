@@ -1,4 +1,4 @@
-require "spec_helper"
+require "rails_helper"
 
 module Scram
   describe Scram::Holder do
