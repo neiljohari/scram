@@ -39,13 +39,17 @@ module Scram
     def can? holder, action, obj
       obj = obj.to_s if obj.is_a? Symbol
       action = action.to_s
-
       # Abstain if policy doesn't apply to the obj
       if obj.is_a? String # String permissions
         return :abstain if self.model? # abstain if policy doesn't handle strings
       else                #
         return :abstain if !self.model? # abstain if policy doesn't handle models
-        return :abstain if self.context != obj.class.name # abstain if policy doesn't handle these types of models
+
+        if obj.is_a?(Class) # Passed in a class, need to check based off the passed in model's name
+          return :abstain if self.context != obj.to_s # abstain if policy doesn't handle these types of models
+        else # Passed in an instance of a model, need to check based off the instance's class's name
+          return :abstain if self.context != obj.class.name
+        end
       end
 
       # Checks targets in priority order for explicit allow or deny.
