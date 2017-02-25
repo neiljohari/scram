@@ -1,41 +1,25 @@
-# coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'scram/version'
+$:.push File.expand_path("../lib", __FILE__)
 
-Gem::Specification.new do |spec|
-  spec.name          = "scram"
-  spec.version       = Scram::VERSION
-  spec.authors       = ["skreem"]
-  spec.email         = ["cskreem@gmail.com"]
+# Maintain your gem's version:
+require "scram/version"
 
-  spec.summary       = "Awesome authorization system"
-  spec.description   = "Authorization system that utilizes an extremely flexible hierarchy"
-  spec.homepage      = "http://github.com/" # TODO
+# Describe your gem and declare its dependencies:
+Gem::Specification.new do |s|
+  s.name          = "scram"
+  s.version       = Scram::VERSION
+  s.authors       = ["skreem"]
+  s.email         = ["cskreem@gmail.com"]
+  s.summary       = "Awesome authorization system"
+  s.description   = "Authorization system that utilizes an extremely flexible hierarchy"
+  s.homepage      = "http://github.com/skreem/scram"
 
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
-  # to allow pushing to a single host or delete this section to allow pushing to any host.
-  if spec.respond_to?(:metadata)
-    spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com'"
-  else
-    raise "RubyGems 2.0 or newer is required to protect against " \
-      "public gem pushes."
-  end
-  spec.metadata["yard.run"] = "yri"
-
-  spec.files         = `git ls-files -z`.split("\x0").reject do |f|
-    f.match(%r{^(test|spec|features)/})
-  end
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
-
-  spec.add_dependency "mongoid", "~> 6.1"
-  spec.add_dependency "activesupport", "~> 5.0"
-  spec.add_development_dependency "bundler", "~> 1.13"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "coveralls", "~> 0.8.19"
-  spec.add_development_dependency "factory_girl", "~> 4.8"
-  spec.add_development_dependency "database_cleaner", "~> 1.5"
+  s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  s.test_files = Dir["spec/**/*"]
+  
+  s.add_runtime_dependency 'rails', '~> 5.0', '>= 5.0.1'
+  s.add_dependency "mongoid", "~> 6.1"
+  s.add_development_dependency 'rspec-rails'
+  s.add_development_dependency "coveralls", "~> 0.8.19"
+  s.add_development_dependency "factory_girl", "~> 4.8"
+  s.add_development_dependency "database_cleaner", "~> 1.5"
 end

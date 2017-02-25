@@ -61,7 +61,8 @@ To do this, we'll need to define a non-model Policy (because our object is a str
 ```ruby
 user = ...
 policy = Scram::Policy.new
-policy.collection_name = "global-strings-policy"
+policy.name = "global-strings-policy" # Note that we're setting name, and we will leave context nil.
+policy.context = nil # This would be nil by default as well. By not setting this to anything, we let this Policy handle String permissions, and not be bound to a model.
 policy.save
 user.policies << policy
 user.save
@@ -97,7 +98,8 @@ Lets make a Policy that handles post related permissions.
 ```ruby
 user = ...
 policy = Scram::Policy.new
-policy.collection_name = Post.class.name
+policy.name = "Post Stuff" # This name is just for organizational/display purposes
+policy.context = Post.to_s # Note: By setting context, we bind this policy to the model "Post"
 policy.save
 user.policies << policy
 user.save

@@ -1,10 +1,10 @@
-require "spec_helper"
+require "rails_helper"
 
 module Scram
   describe Scram::Policy do
     it "prioritizes targets" do
       policy = Policy.new
-      policy.context = TestModel.name # A misc policy for strings
+      policy.context = TestModel.name
 
       # Create a target that doesn't let us woot
       target1 = Target.new

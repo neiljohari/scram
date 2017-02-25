@@ -5,13 +5,16 @@ module Scram
 
     embeds_many :targets, class_name: "Scram::Target"
 
-    validates_presence_of :context
+    validates_presence_of :name
+
+    # @return [String] Name for this Policy. Purely for organizational purposes.
+    field :name, type: String
+
+    # @return [String] What model this Policy applies to. Will be nil if this Policy is not bound to a model.
+    field :context, type: String
 
     # @return [Integer] Priority to allow this policy to override another conflicting {Scram::Policy} opinion.
     field :priority, type: Integer, default: 0
-
-    # @return [String] What this Policy applies to. Usually it will be the name of a Model, but it can also be a String for a "global" policy for non model-bound permissions
-    field :context, type: String
 
     # Helper method to easily tell if this policy is bound to a model
     # @note Unnecessary since we can just call model.nil?, but it is helpful nonetheless
@@ -25,7 +28,7 @@ module Scram
     def model
       begin
         return Module.const_get(context)
-      rescue NameError
+      rescue # NameError if context as a constant doesn't exist, TypeError if context nil
         return nil
       end
     end
@@ -39,13 +42,17 @@ module Scram
     def can? holder, action, obj
       obj = obj.to_s if obj.is_a? Symbol
       action = action.to_s
-
       # Abstain if policy doesn't apply to the obj
       if obj.is_a? String # String permissions
         return :abstain if self.model? # abstain if policy doesn't handle strings
-      else                #
+      else                # Model permissions
         return :abstain if !self.model? # abstain if policy doesn't handle models
-        return :abstain if self.context != obj.class.name # abstain if policy doesn't handle these types of models
+
+        if obj.is_a?(Class) # Passed in a class, need to check based off the passed in model's name
+          return :abstain if self.context != obj.to_s # abstain if policy doesn't handle these types of models
+        else # Passed in an instance of a model, need to check based off the instance's class's name
+          return :abstain if self.context != obj.class.name
+        end
       end
 
       # Checks targets in priority order for explicit allow or deny.

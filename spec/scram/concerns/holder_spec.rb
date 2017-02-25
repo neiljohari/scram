@@ -1,4 +1,4 @@
-require "spec_helper"
+require "rails_helper"
 
 module Scram
   describe Scram::Holder do
@@ -46,7 +46,7 @@ module Scram
       target.actions << "woot"
 
       policy = Policy.new
-      policy.context = "globals" # A misc policy for strings
+      policy.name = "globals" # A misc policy for strings, context wil be nil!
       policy.targets << target
 
       policy.save
