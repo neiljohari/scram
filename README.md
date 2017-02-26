@@ -160,8 +160,24 @@ builder = Scram::DSL::Builders::ComparatorBuilder.new do
 end
 Scram::DSL::Definitions.add_comparators(builder)
 ```
-
 Now your targets can use `asdf` as a conditions key, and Scram will use your method of comparison to determine if something is true or not. In this case, `asdf` returns true regardless of the two objects being compared.
+
+#### Gotchas
+Having trouble trying to use a holder check on a relation? Easy fix! The issue you are experiencing is just that the holder's scram_compare_value will probably be an ObjectId of some sort, but if you are comparing it against the relation... you are trying to compare the current holder's ObjectId to a document. The fix to this is just defining a condition within the model with the user you are trying to compare, and returning the object id of that.
+
+Example of the issue:
+Lets say your `Post` model `belongs_to :user`. If you tried setting up a condition which checks something like this: `:equals => { :'user' => "*holder" }` it will never work because of the above description. To fix it, define a condition which returns an ObjectId.
+
+```ruby
+scram_define do
+  condition :owner do |post|
+    post.user.scram_compare_value # we could also have done post.user.id
+  end
+end
+```
+
+Now update your Target to have the following condition: `:equals => { :'*owner' => "*holder" }`. Voila! It will all work now, because you are correctly comparing the right data types.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
