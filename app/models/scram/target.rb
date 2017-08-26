@@ -57,8 +57,7 @@ module Scram
           attribute = begin obj.send(:"#{field}") rescue return :abstain end
 
           # Special value substitutions
-          (model_value = holder.scram_compare_value) if model_value == "*holder"
-
+          (model_value = holder.scram_compare_value) if model_value.to_s == "*holder"
           # Abstain if this target doesn't apply to obj in any of its attributes
           return :abstain unless comparator.call(attribute, model_value)
         end

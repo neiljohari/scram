@@ -17,6 +17,27 @@ module Scram
       dude = SimpleHolder.new(policies: [policy]) # This is a test holder
       expect(dude.can? :woot, TestModel.new).to be false
     end
+
+    it "can compare holders" do
+      policy = Policy.new
+      policy.context = SimpleHolder.name
+
+      target = Target.new
+      target.actions << "edit"
+      target.allow = true
+      target.conditions = {:equals => {:scram_compare_value => :'*holder'}}
+      policy.targets << target
+
+      policy.save
+
+      dude1 = SimpleHolder.new(policies: [policy], scram_compare_value: "Mr. Holder Guy")
+      dude2 = SimpleHolder.new(policies: [], scram_compare_value: "Mr. Holder Man")
+
+      expect(dude1.can? :edit, dude1).to be true
+      expect(dude1.can? :edit, dude2).to be false
+      expect(dude2.can? :edit, dude2).to be false
+      expect(dude2.can? :edit, dude1).to be false
+    end
   end
 
   describe Scram::Target do

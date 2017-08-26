@@ -8,14 +8,11 @@ module Scram
   class SimpleHolder
     include Holder
 
-    attr_accessor :policies
+    attr_accessor :policies, :scram_compare_value
 
-    def initialize(policies: [])
+    def initialize(policies: [], scram_compare_value: "Mr. Holder Guy")
         @policies = policies
-    end
-
-    def scram_compare_value
-      "Mr. Holder Guy"
+        @scram_compare_value = scram_compare_value
     end
   end
 end
