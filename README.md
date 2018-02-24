@@ -1,4 +1,4 @@
-# Scram [![Build Status](https://travis-ci.org/skreem/scram.svg?branch=master)](https://travis-ci.org/skreem/scram) [![Coverage Status](https://coveralls.io/repos/github/skreem/scram/badge.svg?branch=master)](https://coveralls.io/github/skreem/scram?branch=master)
+# Scram [![Build Status](https://travis-ci.org/neiljohari/scram.svg?branch=master)](https://travis-ci.org/neiljohari/scram) [![Coverage Status](https://coveralls.io/repos/github/neiljohari/scram/badge.svg?branch=master)](https://coveralls.io/github/neiljohari/scram?branch=master)
 An awesome authorization system
 
 ## Installation
