@@ -57,5 +57,21 @@ module Scram
       expect(dude.can? :woot, TestModel).to be true
       expect(dude.can? :woot, TestModel.new).to be true # you can check based off an instance as well
     end
+
+    it "validates that the conditions use defined comparators" do
+      target = Target.new
+      target.conditions = {undefined_comparator: {}}
+
+      target.valid?
+      target.errors[:conditions].should include("can't use undefined comparators")
+    end
+
+    it "validates that the conditions only map to Hashes" do
+      target = Target.new
+      target.conditions = {equals: []}
+
+      target.valid?
+      target.errors[:conditions].should include("comparators must have values of type Hash")
+    end
   end
 end

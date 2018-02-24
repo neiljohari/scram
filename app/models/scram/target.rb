@@ -16,6 +16,9 @@ module Scram
     # @return [Boolean] This target's modification onto a permission (allow or deny), i.e. its type
     field :allow, type: Boolean, default: true
 
+    # Ensures that hash follows the right format
+    validate :conditions_hash_validations
+
     # @return [Symbol] The type of this target (either permissive as allow or deny)
     def target_type
       allow ? :allow : :deny
@@ -64,6 +67,16 @@ module Scram
       end
 
       return target_type
+    end
+
+    private
+
+    # Validates that the conditions Hash follows an expected format
+    def conditions_hash_validations
+      conditions.each do |comparator, mappings|
+        errors.add(:conditions, "can't use undefined comparators") unless Scram::DSL::Definitions::COMPARATORS.keys.include? comparator.to_sym
+        errors.add(:conditions, "comparators must have values of type Hash") unless mappings.is_a? Hash
+      end
     end
   end
 end
