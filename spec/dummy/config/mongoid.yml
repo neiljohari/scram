@@ -140,7 +140,7 @@ test:
     default:
       database: scram_dummy_test
       hosts:
-        - localhost:27017
+        - 127.0.0.1:27017
       options:
         read:
           mode: :primary

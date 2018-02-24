@@ -3,4 +3,8 @@ test:
     default:
       database: scram_db
       hosts:
-        - localhost:27017
+        - 127.0.0.1:27017
+      options:
+        read:
+          mode: :primary
+        max_pool_size: 1
