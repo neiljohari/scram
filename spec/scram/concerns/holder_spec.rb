@@ -40,6 +40,23 @@ module Scram
 
     end
 
+
+    it "provides a negated check helper" do
+      target = Target.new
+      target.conditions = {:equals => { :'*target_name' =>  "donk"}}
+      target.actions << "woot"
+
+      policy = Policy.new
+      policy.name = "globals" # A misc policy for strings, context wil be nil!
+      policy.targets << target
+
+      policy.save
+
+      dude = SimpleHolder.new(policies: [policy]) # This is a test holder
+      expect(dude.cannot? :woot, :donk).to be false
+      expect(dude.cannot? :woot, :donkers).to be true
+    end
+
     it "holds string permissions" do
       target = Target.new
       target.conditions = {:equals => { :'*target_name' =>  "donk"}}

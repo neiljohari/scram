@@ -33,6 +33,10 @@ module Scram
       return false
     end
 
+    # Helper method to enhance readability of permission checks
+    def cannot? *args
+      !can?(*args)
+    end
 
   end
 end
